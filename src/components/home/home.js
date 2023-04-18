@@ -58,11 +58,11 @@ export default function Home() {
 
                 </li>
 
-                <li class="nav-item">
+                {/* <li class="nav-item">
 
                   <a class="nav-link" href="#">Help</a>
 
-                </li>
+                </li> */}
 
 
 

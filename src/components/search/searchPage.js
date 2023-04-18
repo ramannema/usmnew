@@ -23,7 +23,7 @@ this.fetchData();
 }
 
 fetchData = () => {
-fetch('http://localhost:8089/project/UnifiedSecurityMaster/getallsecurities')
+fetch('http://localhost:8087/project/UnifiedSecurityMaster/getallsecurities')
 .then(response => response.json())
 .then(data => this.setState({ data }))
 .catch(error => console.log(error));
@@ -42,7 +42,7 @@ handleSave = () => {
     const{securitiesSymbol} =editedData;
 // send edited data to backend API and update the corresponding data in the MySQL database
 // then close the modal form and fetch the updated data
-fetch(`http://localhost:8089/project/UnifiedSecurityMaster/updateSecurities/${securitiesSymbol}`, {
+fetch(`http://localhost:8087/project/UnifiedSecurityMaster/updateSecurities/${securitiesSymbol}`, {
 method: 'PUT',
 headers: {
 'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ handleDelete = (data) => {
     
     // send delete request to backend API and update the corresponding data in the MySQL database
     // then fetch the updated data
-    fetch(`http://localhost:8089/project/UnifiedSecurityMaster/deletesecurities/${securitiesSymbol}`, {
+    fetch(`http://localhost:8087/project/UnifiedSecurityMaster/deletesecurities/${securitiesSymbol}`, {
     method: 'DELETE',
     headers: {
     'Content-Type': 'application/json',
@@ -118,9 +118,9 @@ onChange={this.handleInputChange}
 <th>Country</th>
 <th>Series</th>
 <th>SecuritiesId</th>
-<th>Price</th>
+<th>Last</th>
+<th>open</th>
 <th>Update</th>
-<th>Delete</th>
 </tr>
 </thead>
 <tbody>{filteredData.map(data => (
@@ -134,12 +134,13 @@ onChange={this.handleInputChange}
 <td>{data.securitiesCountry}</td>
 <td>{data.securitiesSeries}</td>
 <td>{data.securitiesId}</td>
-<td>{data.price}</td>
+<td>{data.last}</td>
+<td>{data.open}</td>
 <td>
 <Button variant="primary" onClick={() => this.handleEdit(data)}>Edit</Button> </td>
-<td>
+{/* <td>
 <Button variant="danger" onClick={() => this.handleDelete(data)}>Delete</Button>
-</td>
+</td> */}
 </tr>
 ))}
 </tbody>
@@ -195,10 +196,17 @@ onChange={this.handleInputChange}
 <Form.Control type="text" name="securitiesId" value={editedData?.securitiesId} onChange={this.handleModalInputChange} placeholder="Enter Security ID" readOnly={true} />
 </Form.Group>
 
-<Form.Group controlId="formPrice">
-<Form.Label>Price</Form.Label>
-<Form.Control type="text" step="0.01" name="price" value={editedData?.price} onChange={this.handleModalInputChange} placeholder="Enter Price" />
+<Form.Group controlId="formlast">
+<Form.Label>Last</Form.Label>
+<Form.Control type="text" name="last" value={editedData?.last} onChange={this.handleModalInputChange} placeholder="last price" readOnly={true} />
 </Form.Group>
+
+<Form.Group controlId="formopen">
+<Form.Label>Open</Form.Label>
+<Form.Control type="text" name="open" value={editedData?.open} onChange={this.handleModalInputChange} placeholder="open price" readOnly={true} />
+</Form.Group>
+
+
 </Form>
 </Modal.Body>
 <Modal.Footer>

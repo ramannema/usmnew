@@ -3,11 +3,12 @@ import "../contact/contact.css"
 import Header from '../header/header'
 import Footer from '../footer/footer'
 
+
 const Contact = () => {
   return (
     
     <div>
-    <Header/>
+        <Header/>
 
         <section className="contact-sec sec-pad">
   <div className="container">
